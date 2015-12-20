@@ -17,8 +17,10 @@ void Draw(RenderWindow& window, StructMechanism mechanism, StructPendulum pendul
 	window.draw(pendulum.weight);
 	window.draw(mechanism.big);
 	window.draw(mechanism.small);	
+	window.draw(mechanism.big2);
+	window.draw(mechanism.small2);
 }
-void InitializeGear(StructMechanism& mechanism, StructImages& gear1, StructImages& gear2)
+void InitializeGear(StructMechanism& mechanism, StructImages& gear1, StructImages& gear2, StructImages& gea3, StructImages& gear4)
 {
 	mechanism.big.setTexture(gear1.texture);
 	mechanism.small.setTexture(gear2.texture);
@@ -26,6 +28,13 @@ void InitializeGear(StructMechanism& mechanism, StructImages& gear1, StructImage
 	mechanism.small.setOrigin(gear2.centre.x, gear2.centre.y);
 	mechanism.big.setPosition(BIG_MECHANISM_POS);
 	mechanism.small.setPosition(SMALL_MECHANISM_POS);
+
+	mechanism.big2.setTexture(gear3.texture);
+	mechanism.small2.setTexture(gear4.texture);
+	mechanism.big2.setOrigin(gear3.centre.x, gear3.centre.y);
+	mechanism.small2.setOrigin(gear4.centre.x, gear4.centre.y);
+	mechanism.big2.setPosition(BIG2_MECHANISM_POS);
+	mechanism.small2.setPosition(SMALL2_MECHANISM_POS);
 }
 void InitializePendulum(StructPendulum& pendulum)
 {
@@ -55,6 +64,8 @@ void UpdateConstruction(StructPendulum& pendulum, StructMechanism& mechanism)
 	pendulum.turn.setRotation(pendulum.rotation);
 	mechanism.big.setRotation(-pendulum.rotation);
 	mechanism.small.setRotation(ANGLE + pendulum.rotation);
+	mechanism.big2.setRotation(ANGLE + pendulum.rotation);
+	mechanism.small2.setRotation(ANGLE + pendulum.rotation);
 };
 void SetPhysics(StructPendulum& pendulum)
 {
@@ -69,8 +80,10 @@ void RunProgram(RenderWindow& window)
 {
 	loadImage(gear1, "../img/gearbig.png");
 	loadImage(gear2, "../img/gearbig.png");
+	loadImage(gear3, "../img/gearbig.png");
+	loadImage(gear4, "../img/gearbig.png");
 	InitializePendulum(pendulum);
-	InitializeGear(mechanism, gear1, gear2);
+	InitializeGear(mechanism, gear1, gear2, gear3, gear4);
 	Clock clock;
 	int time;
 	while (window.isOpen())
